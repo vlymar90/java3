@@ -40,18 +40,18 @@ public class Main <T> {
 
     public static void main(String[] args) {
 
-        Apple[] apples = {new Apple(1), new Apple(1), new Apple(1)};
-        Orange[] oranges = {new Orange(1.5f), new Orange(1.5f)};
+        Apple[] apples = {new Apple(), new Apple(), new Apple()};
+        Orange[] oranges = {new Orange(), new Orange()};
         Box<Apple> boxApples = new Box<>(new ArrayList<>(Arrays.asList(apples)));
         Box<Orange> boxOrange = new Box<>(new ArrayList<>(Arrays.asList(oranges)));
         Box<Apple> newBoxApples = new Box<>(new ArrayList<>());
 
         //Test
         System.out.println(boxApples.compare(boxOrange));
-        boxApples.add(apples[0]);
-        boxApples.shift(newBoxApples.getList());
-        System.out.println(newBoxApples.getList());
-        System.out.println(boxApples.getList());
+//        boxApples.add(apples[0]);
+//        boxApples.shift(newBoxApples.getList());
+//        System.out.println(newBoxApples.getList());
+//        System.out.println(boxApples.getList());
 
     }
 }
