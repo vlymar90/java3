@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main <T> {
+    //done task1
+
     T[] list;
 
     public Main(T... list) {
@@ -46,7 +48,7 @@ public class Main <T> {
         Box<Orange> boxOrange = new Box<>(new ArrayList<>(Arrays.asList(oranges)));
         Box<Apple> newBoxApples = new Box<>(new ArrayList<>());
 
-        //Test
+        //Test task2
         System.out.println(boxApples.compare(boxOrange));
 //        boxApples.add(apples[0]);
 //        boxApples.shift(newBoxApples.getList());
