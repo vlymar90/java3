@@ -10,35 +10,37 @@ public class ClassStart {
        private static int after = 0;
        private static Map<Integer, ArrayList<Method>> mapMethod = new HashMap<>();
 
-    public static void start(Class<?> testClass)  {
+    public static void start(Class<?> testClass) {
         Method[] method = testClass.getDeclaredMethods();
-
-        for(int i = 0; i < method.length; i++) {
-           if(method[i].getAnnotation(BeforeSuite.class) != null) {
-               before++;
-               if(before != 1) {
-                   throw new RuntimeException("В классе " + testClass.getName() + " не может быть больше одного метода с анотацией @BeforeSuite");
-               }
-             BeforeSuite annotation = method[i].getAnnotation(BeforeSuite.class);
-                sort(annotation.value(), method[i]);
-           }
-            if(method[i].getAnnotation(AfterSuite.class) != null) {
-                after++;
-                if(after !=1) {
-                    throw new RuntimeException("В классе " + testClass.getName() + " не может быть больше одного метода с анотацией @BAfterSuite");
+        if (method != null) {
+            for (int i = 0; i < method.length; i++) {
+                if (method[i].getAnnotation(BeforeSuite.class) != null) {
+                    before++;
+                    if (before != 1) {
+                        throw new RuntimeException("В классе " + testClass.getName() + " не может быть больше одного метода с анотацией @BeforeSuite");
+                    }
+                    BeforeSuite annotation = method[i].getAnnotation(BeforeSuite.class);
+                    sort(annotation.value(), method[i]);
                 }
-                AfterSuite annotation = method[i].getAnnotation(AfterSuite.class);
-                sort(annotation.value(), method[i]);
-            }
+                if (method[i].getAnnotation(AfterSuite.class) != null) {
+                    after++;
+                    if (after != 1) {
+                        throw new RuntimeException("В классе " + testClass.getName() + " не может быть больше одного метода с анотацией @BAfterSuite");
+                    }
+                    AfterSuite annotation = method[i].getAnnotation(AfterSuite.class);
+                    sort(annotation.value(), method[i]);
+                }
 
-            if(method[i].getAnnotation(Test.class) != null) {
-                Test annotation = method[i].getAnnotation(Test.class);
-                sort(annotation.value(), method[i]);
-            }
+                if (method[i].getAnnotation(Test.class) != null) {
+                    Test annotation = method[i].getAnnotation(Test.class);
+                    sort(annotation.value(), method[i]);
+                }
 
+            }
+            System.out.println("Тестирование класса: " + testClass.getName());
+            printResult(mapMethod, testClass);
         }
-        System.out.println("Тестирование класса: " + testClass.getName());
-        printResult(mapMethod, testClass);
+        else System.out.println("В классе " + testClass.getName() + " нет методов");
     }
 
     private static void sort(int priority, Method method) {
